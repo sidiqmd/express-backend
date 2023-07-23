@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  express-backend:
+    build:
+      context: .
+    ports:
+      - 80:3000
+    environment:
+      - STAGE=dev
+      - PORT=3000
+      - BASE_URL=/api
+      - DATABASE_TYPE=postgres
+      - DATABASE_NAME=expressBackendDB
+      - DATABASE_HOST=db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_PORT=5432
+      - ACCESS_TOKEN_KEY=tHnREhf1ic4T2xpGzXiWFSitgzhu7ydFf3gaBgXlrB9OdZkO7Hi82OD7HQ77
+      - REFRESH_TOKEN_KEY=w4dmSZKqlXrq3LuzozrEf5MCauInh3lUPAVErS963e5kN7fYv3VXIdDxc6bz
+
+  db:
+    container_name: pg_container
+    image: postgres:15.3-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=expressBackendDB
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local

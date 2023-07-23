@@ -53,4 +53,4 @@ AppDataSource.initialize()
             );
         });
     })
-    .catch((error) => logger().info('123445444444'));
+    .catch((error) => logger().error(error));
